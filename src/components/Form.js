@@ -13,7 +13,7 @@ import ResultCard from './ResultCard';
 const override = css`
   display: block;
   margin: 0 auto;
-  border-color: red;
+  border-color: "#53ade0";
 `;
 
 const useStyles = makeStyles((theme) => ({
@@ -30,6 +30,11 @@ const useStyles = makeStyles((theme) => ({
     button: {
         marginTop: theme.spacing(3),
         marginLeft: theme.spacing(2),
+        backgroundColor: "#53ade0"
+    },
+    buttonClose: {
+      marginTop: theme.spacing(3),
+      marginLeft: theme.spacing(2),
     },
     resultCard: {
       marginBottom: "20px"
@@ -155,7 +160,7 @@ export default function Form() {
 
   return (
     <React.Fragment>
-      <ClipLoader color={"#fff"} loading={loading} css={override} size={150} />
+      <ClipLoader color={"#53ade0"} loading={loading} css={override} size={150} />
       { (isApiCalledSuccessfull === true && isApiCalledSuccessfull !== null) && <ResultCard data={result} reset={reset} /> }
       { (isApiCalledSuccessfull === false && isApiCalledSuccessfull !== null) && <ErrorCard /> }
 
@@ -263,7 +268,7 @@ export default function Form() {
           />
         </Grid>
         <Grid item xs={12} sm={12} justify="flex-end" container>
-            <Button onClick={handleReset} className={classes.button}  >
+            <Button onClick={handleReset} className={classes.buttonClose}  >
                 Close
             </Button>
             <Button onClick={handleFormSubmit} className={classes.button} variant="contained" color="primary">

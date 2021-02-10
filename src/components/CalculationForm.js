@@ -42,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
     },
     paper: {
         marginBottom: theme.spacing(3),
+        borderTop: "1px solid #53ade0",
         padding: theme.spacing(2),
         [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
         marginBottom: theme.spacing(6),
