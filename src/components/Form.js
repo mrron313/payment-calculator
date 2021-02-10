@@ -29,11 +29,11 @@ const useStyles = makeStyles((theme) => ({
     },
     button: {
         marginTop: theme.spacing(3),
-        marginLeft: theme.spacing(1),
+        marginLeft: theme.spacing(2),
     },
     resultCard: {
       marginBottom: "20px"
-    }
+    },
 }));
 
 export default function Form() {
@@ -61,13 +61,17 @@ export default function Form() {
     interest_rate: { error: false, helperText: ""},
   });
 
+  function isNumeric(value) {
+    return /^-?\d+$/.test(value);
+  }
+
   const validateForm = () => {
     let validated = true;
     let currentErrorState = isError;
     
     for (let i=0; i< formFields.length; i++) {
+      let required = false;
       if (formData[formFields[i]] === null || formData[formFields[i]] === "") {
-        console.log(formFields[i]);
         currentErrorState = {
           ...currentErrorState,
           [formFields[i]]: {
@@ -77,7 +81,18 @@ export default function Form() {
         };
         setIsError(currentErrorState);
         validated = false;
-        console.log(isError)
+        required = true;
+      } 
+      if (!isNumeric(formData[formFields[i]]) && !required && formData[formFields[i]] !== "0" ){
+        currentErrorState = {
+          ...currentErrorState,
+          [formFields[i]]: {
+            error: true,
+            helperText: "The value of this field must be number",
+          },
+        };
+        setIsError(currentErrorState);
+        validated = false;
       }
     }
 
@@ -247,12 +262,12 @@ export default function Form() {
             onChange={e => handleInputFormChange(e)}
           />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={12} justify="flex-end" container>
+            <Button onClick={handleReset} className={classes.button}  >
+                Close
+            </Button>
             <Button onClick={handleFormSubmit} className={classes.button} variant="contained" color="primary">
                 Calculate
-            </Button>
-            <Button onClick={handleReset} className={classes.button} variant="contained" >
-                Close
             </Button>
         </Grid>
       </Grid>

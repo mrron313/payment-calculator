@@ -8,6 +8,7 @@ import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Form from './Form';
+import Divider from '@material-ui/core/Divider';
 
 function Copyright() {
   return (
@@ -26,6 +27,9 @@ const useStyles = makeStyles((theme) => ({
     appBar: {
         position: 'relative',
     },
+    header:{
+      marginTop: theme.spacing(6),
+    },
     layout: {
         width: 'auto',
         marginLeft: theme.spacing(2),
@@ -37,11 +41,9 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     paper: {
-        marginTop: theme.spacing(3),
         marginBottom: theme.spacing(3),
         padding: theme.spacing(2),
         [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
-        marginTop: theme.spacing(6),
         marginBottom: theme.spacing(6),
         padding: theme.spacing(3),
         },
@@ -65,14 +67,11 @@ export default function CalculationForm() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <AppBar position="absolute" color="default" className={classes.appBar}>
-        <Toolbar>
-            <Typography variant="h6" color="inherit" noWrap>
-                    Payment Calculator
-            </Typography>
-        </Toolbar>
-      </AppBar>
       <main className={classes.layout}>
+        <h2 className={classes.header}>
+          Payment Calculator
+        </h2>
+        <Divider />
         <Paper className={classes.paper}>
           <Typography component="h1" variant="h4" align="center">
           </Typography>
