@@ -1,0 +1,16 @@
+{
+  "bracketSpacing": true,
+  "jsxBracketSameLine": true,
+  "printWidth": 100,
+  "singleQuote": true,
+  "trailingComma": "es5",
+  "tabWidth": 2,
+  "useTabs": false,
+  "htmlWhitespaceSensitivity": "ignore",
+  "react/jsx-max-props-per-line": [
+    1,
+    {
+      "when": "always"
+    }
+  ]
+}
