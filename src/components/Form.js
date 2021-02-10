@@ -31,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
         marginTop: theme.spacing(3),
         marginLeft: theme.spacing(1),
     },
+    resultCard: {
+      marginBottom: "20px"
+    }
 }));
 
 export default function Form() {
@@ -114,6 +117,18 @@ export default function Form() {
     setIsApiCallSuccessfull(null);
   }
 
+  const handleReset = () => {
+    setFormData({
+      price: null,
+      tradein_value: 0,
+      tradein_owing: 0,
+      term_months: null,
+      down_payment: null,
+      tax_rate: null,
+      interest_rate: null,
+    });
+  }
+
   const handleInputFormChange = e => {
     setFormData({
       ...formData,
@@ -138,11 +153,11 @@ export default function Form() {
             helperText={isError.price.helperText}
             required
             id="price"
+            key="price"
             name="price"
             label="Price ($)"
             fullWidth
-            defaultValue={formData.price}
-            value={formData.price}
+            value={formData.price || ""}
             autoComplete="price"
             onChange={e => handleInputFormChange(e)}
             prefix="$"
@@ -157,8 +172,7 @@ export default function Form() {
             name="tradein_value"
             label="Trade-in Value ($)"
             fullWidth
-            defaultValue={formData.tradein_value}
-            value={formData.tradein_value}
+            value={formData.tradein_value || 0}
             autoComplete="tradein_value"
             onChange={e => handleInputFormChange(e)}
           />
@@ -172,8 +186,7 @@ export default function Form() {
             name="tradein_owing"
             label="Trade-in Owing ($)"
             fullWidth
-            defaultValue={formData.tradein_owing}
-            value={formData.tradein_owing}
+            value={formData.tradein_owing || 0}
             autoComplete="tradein_owing"
             onChange={e => handleInputFormChange(e)}
           />
@@ -187,8 +200,7 @@ export default function Form() {
             name="down_payment"
             label="Down Payment ($)"
             fullWidth
-            defaultValue={formData.down_payment}
-            value={formData.down_payment}
+            value={formData.down_payment || ""}
             autoComplete="down_payment"
             onChange={e => handleInputFormChange(e)}
           />
@@ -202,8 +214,7 @@ export default function Form() {
             name="term_months"
             label="Term Months"
             fullWidth
-            defaultValue={formData.term_months}
-            value={formData.term_months}
+            value={formData.term_months || ""}
             autoComplete="term_months"
             onChange={e => handleInputFormChange(e)}
           />
@@ -217,8 +228,7 @@ export default function Form() {
             name="tax_rate"
             label="Tax Rate (%)"
             fullWidth
-            defaultValue={formData.tax_rate}
-            value={formData.tax_rate}
+            value={formData.tax_rate || ""}
             autoComplete="tax_rate"
             onChange={e => handleInputFormChange(e)}
           />
@@ -232,8 +242,7 @@ export default function Form() {
             name="interest_rate"
             label="Interest Rate (%)"
             fullWidth
-            defaultValue={formData.interest_rate}
-            value={formData.interest_rate}
+            value={formData.interest_rate || ""}
             autoComplete="interest_rate"
             onChange={e => handleInputFormChange(e)}
           />
@@ -241,6 +250,9 @@ export default function Form() {
         <Grid item xs={12} sm={6}>
             <Button onClick={handleFormSubmit} className={classes.button} variant="contained" color="primary">
                 Calculate
+            </Button>
+            <Button onClick={handleReset} className={classes.button} variant="contained" >
+                Close
             </Button>
         </Grid>
       </Grid>
