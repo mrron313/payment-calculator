@@ -1,13 +1,35 @@
-import './App.css';
+import React, { useState } from 'react';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { BrowserRouter } from "react-router-dom";import './App.css';
 import Routes from './Routes';
-import { BrowserRouter } from "react-router-dom";
+import {connect} from 'react-redux'
 
-function App() {
+function App(props) {
+  const { isDarkMode } = props;
+
+  const theme = React.useMemo(
+    () =>
+      createMuiTheme({
+        palette: {
+          type: isDarkMode ? 'dark' : 'light',
+        },
+      }),
+    [isDarkMode],
+  );
+
   return (
-    <BrowserRouter>
-      <Routes />
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <CssBaseline/>
+          <Routes />
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 
-export default App;
+const mapStateToProps = state => ({
+  isDarkMode: state.isDarkMode
+});
+
+export default connect(mapStateToProps, {})(App)

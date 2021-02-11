@@ -30,7 +30,10 @@ const useStyles = makeStyles((theme) => ({
     button: {
         marginTop: theme.spacing(3),
         marginLeft: theme.spacing(2),
-        backgroundColor: "#53ade0"
+        backgroundColor: "#53ade0",
+          "&:hover": {
+            backgroundColor: "#53ade0"
+        }
     },
     buttonClose: {
       marginTop: theme.spacing(3),
@@ -269,7 +272,7 @@ export default function Form() {
         </Grid>
         <Grid item xs={12} sm={12} justify="flex-end" container>
             <Button onClick={handleReset} className={classes.buttonClose}  >
-                Close
+                Reset
             </Button>
             <Button onClick={handleFormSubmit} className={classes.button} variant="contained" color="primary">
                 Calculate

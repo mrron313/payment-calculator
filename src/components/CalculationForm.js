@@ -1,14 +1,15 @@
-import React from 'react';
+
+import React, { useState, useEffect } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
 import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Form from './Form';
 import Divider from '@material-ui/core/Divider';
+import DarkModeToggle from "react-dark-mode-toggle";
+import { toggleThemeMode } from '../redux/actions';
+import { connect } from "react-redux";
 
 function Copyright() {
   return (
@@ -29,6 +30,16 @@ const useStyles = makeStyles((theme) => ({
     },
     header:{
       marginTop: theme.spacing(6),
+      marginBottom: theme.spacing(2),
+      fontSize: "24px",
+      display: 'flex',
+      justifyContent: 'space-between',
+    },
+    headerText:{
+      fontSize: "24px",
+      margin: "0px"
+    },
+    toggle: {
     },
     layout: {
         width: 'auto',
@@ -62,26 +73,50 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export default function CalculationForm() {
+function CalculationForm(props) {
   const classes = useStyles();
+  const { toggleThemeMode, isDarkMode } = props;
+  const [dark, setDark] = useState(isDarkMode);
+
+  const handleToggleThemeMode = () => {
+    setDark(!dark);
+    toggleThemeMode(!dark);
+  }
 
   return (
     <React.Fragment>
       <CssBaseline />
       <main className={classes.layout}>
-        <h2 className={classes.header}>
-          Payment Calculator
-        </h2>
-        <Divider />
-        <Paper className={classes.paper}>
-          <Typography component="h1" variant="h4" align="center">
-          </Typography>
-          <React.Fragment>
-            <Form />
-          </React.Fragment>
-        </Paper>
-        <Copyright />
+          <div className={classes.header}>
+              <h2 className={classes.headerText}>
+                Payment Calculator 
+              </h2>
+              <DarkModeToggle
+                className={classes.toggle}
+                onChange={handleToggleThemeMode}
+                checked={dark}
+                size={50}
+              />
+          </div>
+          <Divider />
+          <Paper className={classes.paper}>
+            <Typography component="h1" variant="h4" align="center">
+            </Typography>
+            <React.Fragment>
+              <Form />
+            </React.Fragment>
+          </Paper>
+          <Copyright />
       </main>
     </React.Fragment>
   );
 }
+
+const mapStateToProps = state => ({
+  isDarkMode: state.isDarkMode
+});
+
+export default connect(
+  mapStateToProps,
+  { toggleThemeMode }
+)(CalculationForm)

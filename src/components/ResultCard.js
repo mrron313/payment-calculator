@@ -1,28 +1,28 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 import ListItemText from '@material-ui/core/ListItemText';
 import IconButton from '@material-ui/core/IconButton';
+import Tooltip from '@material-ui/core/Tooltip';
 
 const useStyles = makeStyles({
   root: {
     maxWidth: 700,
-    marginBottom: "30px",
+    marginBottom: "50px",
     padding: "0px"
   },
   closeButton: {
     float: 'right',
-  }
+  },
+  list: {
+    marginBottom: "0px",
+    padding: "0px"
+  },
 });
 
 const ResultCard = props => {
@@ -38,19 +38,21 @@ const ResultCard = props => {
         <Card className={classes.root}>
             <CardContent>
                 <div>
-                    <Typography gutterBottom variant="h5" component="h6">
+                    <Typography gutterBottom variant="h6" component="h6">
                         Calculated Payment
-                        
-                        <IconButton aria-label="close" className={classes.closeButton}>
-                            <HighlightOffIcon onClick={closeResult} />
-                        </IconButton>
+
+                        <Tooltip title="Close">
+                            <IconButton aria-label="close" className={classes.closeButton}>
+                                <HighlightOffIcon onClick={closeResult} />
+                            </IconButton>
+                        </Tooltip>
                     </Typography>
                 </div>
                 <Typography variant="body2" color="textSecondary" component="span">
                     <List
                     component="nav"
                     aria-labelledby="nested-list-subheader"
-                    className={classes.root}
+                    className={classes.list}
                     >
                         <ListItem>
                             <ListItemText primary="Biweekly" /> {result.biweekly}
